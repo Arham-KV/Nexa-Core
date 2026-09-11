@@ -31,6 +31,8 @@ interface ElementorEditorPanelProps {
   onSelectElement: (el: string) => void;
   onDeviceChange: (device: 'desktop' | 'tablet' | 'mobile') => void;
   currentDevice: 'desktop' | 'tablet' | 'mobile';
+  fontTheme?: 'outfit' | 'urbanist' | 'syne';
+  onChangeFontTheme?: (theme: 'outfit' | 'urbanist' | 'syne') => void;
 }
 
 export default function ElementorEditorPanel({
@@ -38,7 +40,9 @@ export default function ElementorEditorPanel({
   selectedElement,
   onSelectElement,
   onDeviceChange,
-  currentDevice
+  currentDevice,
+  fontTheme = 'outfit',
+  onChangeFontTheme
 }: ElementorEditorPanelProps) {
   const [activeTab, setActiveTab] = useState<'elements' | 'style' | 'advanced'>('elements');
   const [searchQuery, setSearchQuery] = useState('');
@@ -240,10 +244,43 @@ export default function ElementorEditorPanel({
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="font-semibold text-slate-300 block">Global Typography Preset</label>
-                  <div className="p-2.5 rounded bg-[#1a1c1e] border border-[#34383c] space-y-1">
-                    <p className="font-bold text-white">Plus Jakarta Sans (H1)</p>
-                    <p className="text-[11px] text-slate-400">Weight: 800 | Size: 52px | Line-Height: 1.15</p>
+                  <label className="font-semibold text-slate-300 block">Global Typography Preset (Elementor Pro)</label>
+                  <div className="p-2.5 rounded bg-[#1a1c1e] border border-[#34383c] space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-white text-xs">
+                        {fontTheme === 'outfit' ? 'Outfit + Manrope' : fontTheme === 'urbanist' ? 'Urbanist + Jakarta' : 'Syne + Manrope'}
+                      </span>
+                      <span className="text-[10px] text-emerald-400 font-mono">Active Preset</span>
+                    </div>
+                    {onChangeFontTheme && (
+                      <div className="grid grid-cols-3 gap-1 pt-1">
+                        <button
+                          onClick={() => onChangeFontTheme('outfit')}
+                          className={`py-1 px-1.5 rounded text-[10px] font-bold text-center transition-colors cursor-pointer ${
+                            fontTheme === 'outfit' ? 'bg-[#92003B] text-white' : 'bg-[#26292c] text-slate-400 hover:text-white'
+                          }`}
+                        >
+                          Outfit
+                        </button>
+                        <button
+                          onClick={() => onChangeFontTheme('urbanist')}
+                          className={`py-1 px-1.5 rounded text-[10px] font-bold text-center transition-colors cursor-pointer ${
+                            fontTheme === 'urbanist' ? 'bg-[#92003B] text-white' : 'bg-[#26292c] text-slate-400 hover:text-white'
+                          }`}
+                        >
+                          Urbanist
+                        </button>
+                        <button
+                          onClick={() => onChangeFontTheme('syne')}
+                          className={`py-1 px-1.5 rounded text-[10px] font-bold text-center transition-colors cursor-pointer ${
+                            fontTheme === 'syne' ? 'bg-[#92003B] text-white' : 'bg-[#26292c] text-slate-400 hover:text-white'
+                          }`}
+                        >
+                          Syne
+                        </button>
+                      </div>
+                    )}
+                    <p className="text-[10px] text-slate-400 pt-0.5">Primary Weight: 800 | Display Scale: 1.25x | Anti-aliased</p>
                   </div>
                 </div>
 

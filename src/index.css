@@ -1,1 +1,40 @@
 @import "tailwindcss";
+
+:root {
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+[data-font-theme="outfit"] {
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+}
+
+[data-font-theme="urbanist"] {
+  --font-heading: 'Urbanist', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+[data-font-theme="syne"] {
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+}
+
+html, body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-heading,
+.font-display,
+.heading-font {
+  font-family: var(--font-heading) !important;
+  letter-spacing: -0.028em;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}

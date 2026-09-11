@@ -33,6 +33,7 @@ export default function App() {
   const [isElementorMode, setIsElementorMode] = useState(false);
   const [selectedElement, setSelectedElement] = useState<string>('none');
   const [deviceMode, setDeviceMode] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
+  const [fontTheme, setFontTheme] = useState<'outfit' | 'urbanist' | 'syne'>('outfit');
 
   const handleToggleElementor = () => {
     setIsElementorMode(!isElementorMode);
@@ -105,7 +106,7 @@ export default function App() {
   // If in WordPress Admin Dashboard mode (/wp-admin)
   if (currentView === 'dashboard') {
     return (
-      <div className="min-h-screen bg-[#f0f0f1] font-sans antialiased text-[#2c3338]">
+      <div data-font-theme={fontTheme} className="min-h-screen bg-[#f0f0f1] font-sans antialiased text-[#2c3338]">
         <WordPressDashboard
           onVisitSite={() => setCurrentView('website')}
           onEditPageWithElementor={handleEditPageWithElementor}
@@ -130,7 +131,7 @@ export default function App() {
 
   // Pure Authentic WordPress Website Mode
   return (
-    <div className="min-h-screen flex flex-col bg-white font-sans text-slate-800 selection:bg-blue-600 selection:text-white">
+    <div data-font-theme={fontTheme} className="min-h-screen flex flex-col bg-white font-sans text-slate-800 selection:bg-blue-600 selection:text-white">
       {/* =========================================================================
           AUTHENTIC WORDPRESS ADMIN BAR (TOP 32px)
           Provides real WordPress admin controls, Elementor launcher & Vercel deployment
@@ -144,6 +145,8 @@ export default function App() {
         onOpenUpworkKit={() => setUpworkModalOpen(true)}
         onOpenVercelGuide={() => setVercelModalOpen(true)}
         currentView={currentView}
+        fontTheme={fontTheme}
+        onChangeFontTheme={setFontTheme}
       />
 
       {/* =========================================================================
@@ -160,6 +163,8 @@ export default function App() {
             onSelectElement={(el) => setSelectedElement(el)}
             onDeviceChange={(d) => setDeviceMode(d)}
             currentDevice={deviceMode}
+            fontTheme={fontTheme}
+            onChangeFontTheme={setFontTheme}
           />
         )}
 

@@ -8,7 +8,9 @@ import {
   Eye, 
   EyeOff, 
   LayoutDashboard,
-  Award
+  Award,
+  Type,
+  Check
 } from 'lucide-react';
 
 interface WordPressAdminBarProps {
@@ -20,6 +22,8 @@ interface WordPressAdminBarProps {
   adminBarVisible: boolean;
   onToggleAdminBar: () => void;
   currentView: 'website' | 'dashboard';
+  fontTheme: 'outfit' | 'urbanist' | 'syne';
+  onChangeFontTheme: (theme: 'outfit' | 'urbanist' | 'syne') => void;
 }
 
 export default function WordPressAdminBar({
@@ -30,9 +34,11 @@ export default function WordPressAdminBar({
   isElementorMode,
   adminBarVisible,
   onToggleAdminBar,
-  currentView
+  currentView,
+  fontTheme,
+  onChangeFontTheme
 }: WordPressAdminBarProps) {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [fontMenuOpen, setFontMenuOpen] = useState(false);
 
   if (!adminBarVisible) {
     return (
@@ -118,6 +124,80 @@ export default function WordPressAdminBar({
             </span>
           </button>
 
+          {/* Premium Font Selector Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setFontMenuOpen(!fontMenuOpen)}
+              className="flex items-center gap-1.5 px-2 py-0.5 rounded-xs bg-[#2c3338] hover:bg-[#383e44] text-slate-200 hover:text-white transition-colors cursor-pointer text-[11px] border border-slate-700/60"
+              title="Switch Premium Typography"
+            >
+              <Type className="w-3.5 h-3.5 text-amber-400" />
+              <span className="font-semibold hidden md:inline">Font:</span>
+              <span className="font-bold text-amber-300">
+                {fontTheme === 'outfit' ? 'Outfit' : fontTheme === 'urbanist' ? 'Urbanist' : 'Syne'}
+              </span>
+            </button>
+
+            {fontMenuOpen && (
+              <div 
+                className="absolute top-full left-0 mt-1 w-56 bg-[#1d2327] text-white rounded-md shadow-2xl border border-slate-700 py-1 z-50 animate-in fade-in zoom-in-95 text-xs"
+                onMouseLeave={() => setFontMenuOpen(false)}
+              >
+                <div className="px-3 py-1.5 text-[10px] font-bold uppercase text-slate-400 border-b border-slate-700">
+                  Select Premium Font Pairing
+                </div>
+
+                <button
+                  onClick={() => {
+                    onChangeFontTheme('outfit');
+                    setFontMenuOpen(false);
+                  }}
+                  className={`w-full px-3 py-2 text-left flex items-center justify-between hover:bg-[#2c3338] transition-colors cursor-pointer ${
+                    fontTheme === 'outfit' ? 'text-amber-400 bg-[#2c3338] font-bold' : 'text-slate-300'
+                  }`}
+                >
+                  <div>
+                    <span className="font-bold block" style={{ fontFamily: 'Outfit, sans-serif' }}>Outfit + Manrope</span>
+                    <span className="text-[10px] text-slate-400">Luxury Tech &amp; Executive (Default)</span>
+                  </div>
+                  {fontTheme === 'outfit' && <Check className="w-3.5 h-3.5 text-amber-400" />}
+                </button>
+
+                <button
+                  onClick={() => {
+                    onChangeFontTheme('urbanist');
+                    setFontMenuOpen(false);
+                  }}
+                  className={`w-full px-3 py-2 text-left flex items-center justify-between hover:bg-[#2c3338] transition-colors cursor-pointer ${
+                    fontTheme === 'urbanist' ? 'text-amber-400 bg-[#2c3338] font-bold' : 'text-slate-300'
+                  }`}
+                >
+                  <div>
+                    <span className="font-bold block" style={{ fontFamily: 'Urbanist, sans-serif' }}>Urbanist + Jakarta</span>
+                    <span className="text-[10px] text-slate-400">Swiss Modern Architectural</span>
+                  </div>
+                  {fontTheme === 'urbanist' && <Check className="w-3.5 h-3.5 text-amber-400" />}
+                </button>
+
+                <button
+                  onClick={() => {
+                    onChangeFontTheme('syne');
+                    setFontMenuOpen(false);
+                  }}
+                  className={`w-full px-3 py-2 text-left flex items-center justify-between hover:bg-[#2c3338] transition-colors cursor-pointer ${
+                    fontTheme === 'syne' ? 'text-amber-400 bg-[#2c3338] font-bold' : 'text-slate-300'
+                  }`}
+                >
+                  <div>
+                    <span className="font-bold block" style={{ fontFamily: 'Syne, sans-serif' }}>Syne + Manrope</span>
+                    <span className="text-[10px] text-slate-400">Award-Winning Creative Studio</span>
+                  </div>
+                  {fontTheme === 'syne' && <Check className="w-3.5 h-3.5 text-amber-400" />}
+                </button>
+              </div>
+            )}
+          </div>
+
           {/* Upwork Kit Button in Admin Bar */}
           <button
             onClick={onOpenUpworkKit}
@@ -127,12 +207,6 @@ export default function WordPressAdminBar({
             <Award className="w-3 h-3 text-emerald-200" />
             <span>Upwork Kit</span>
           </button>
-
-          {/* + New dropdown */}
-          <div className="hidden lg:flex items-center gap-1 px-2 py-1 hover:bg-[#2c3338] hover:text-[#72aee6] transition-colors rounded-xs cursor-pointer">
-            <Plus className="w-3.5 h-3.5" />
-            <span>New</span>
-          </div>
         </div>
 
         {/* Right side: Vercel Deploy & User */}
