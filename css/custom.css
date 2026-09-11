@@ -1,0 +1,261 @@
+/**
+ * NexaCore Solutions — Custom Stylesheet for WordPress & Elementor
+ * Author: Syed Arham / Web Design & Development Specialist
+ * Version: 1.0.0
+ * Description: Production-ready custom CSS enhancing Elementor Pro containers and widgets.
+ * Color Palette:
+ *   - Primary:    #0F172A (Deep Slate)
+ *   - Secondary:  #2563EB (Royal Blue)
+ *   - Accent:     #38BDF8 (Vibrant Sky)
+ *   - Background: #F8FAFC (Soft Slate)
+ *   - Text:       #334155 (Muted Slate)
+ *   - White:      #FFFFFF
+ */
+
+/* ==========================================================================
+   1. Root Variables & Typography
+   ========================================================================== */
+:root {
+  --nc-primary: #0F172A;
+  --nc-primary-rgb: 15, 23, 42;
+  --nc-secondary: #2563EB;
+  --nc-secondary-rgb: 37, 99, 235;
+  --nc-accent: #38BDF8;
+  --nc-accent-rgb: 56, 189, 248;
+  --nc-bg: #F8FAFC;
+  --nc-text: #334155;
+  --nc-text-light: #64748B;
+  --nc-white: #FFFFFF;
+  --nc-border: #E2E8F0;
+  --nc-shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --nc-shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --nc-shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --nc-shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  --nc-radius: 12px;
+  --nc-transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--nc-text);
+  background-color: var(--nc-bg);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings font */
+h1, h2, h3, h4, h5, h6,
+.elementor-heading-title {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  color: var(--nc-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   2. Sticky Header with Scroll Detection
+   ========================================================================== */
+.nc-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  transition: padding 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.nc-sticky-header.nc-scrolled {
+  background-color: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.07);
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+}
+
+/* ==========================================================================
+   3. Interactive Cards & Hover Lift States
+   ========================================================================== */
+.nc-card-hover {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+.nc-card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--nc-shadow-xl);
+  border-color: rgba(37, 99, 235, 0.3) !important;
+}
+
+/* Service Card Icon Container */
+.nc-service-icon-wrap {
+  width: 54px;
+  height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(56, 189, 248, 0.15) 100%);
+  color: var(--nc-secondary);
+  transition: var(--nc-transition);
+}
+
+.nc-card-hover:hover .nc-service-icon-wrap {
+  background: linear-gradient(135deg, var(--nc-secondary) 0%, var(--nc-accent) 100%);
+  color: var(--nc-white);
+  transform: scale(1.06);
+}
+
+/* ==========================================================================
+   4. Conversion Buttons & Badge Accents
+   ========================================================================== */
+.nc-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--nc-secondary);
+  color: var(--nc-white) !important;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 13px 26px;
+  font-size: 0.95rem;
+  transition: var(--nc-transition);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.nc-btn-primary:hover {
+  background-color: #1d4ed8;
+  box-shadow: 0 10px 20px -3px rgba(37, 99, 235, 0.35);
+  transform: translateY(-2px);
+}
+
+.nc-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: transparent;
+  color: var(--nc-primary) !important;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 13px 26px;
+  font-size: 0.95rem;
+  border: 1px solid var(--nc-border);
+  transition: var(--nc-transition);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.nc-btn-secondary:hover {
+  background-color: #FFFFFF;
+  border-color: var(--nc-secondary);
+  color: var(--nc-secondary) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--nc-shadow-md);
+}
+
+/* Trust Pill Badge */
+.nc-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background-color: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  color: var(--nc-secondary);
+  font-size: 0.825rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.nc-pill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+/* ==========================================================================
+   5. Elementor Form Enhancements
+   ========================================================================== */
+.nc-form-styled .elementor-field-group input,
+.nc-form-styled .elementor-field-group textarea,
+.nc-form-styled .elementor-field-group select {
+  border: 1px solid var(--nc-border) !important;
+  border-radius: 10px !important;
+  padding: 12px 16px !important;
+  font-size: 0.95rem !important;
+  color: var(--nc-primary) !important;
+  background-color: #FFFFFF !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.nc-form-styled .elementor-field-group input:focus,
+.nc-form-styled .elementor-field-group textarea:focus,
+.nc-form-styled .elementor-field-group select:focus {
+  border-color: var(--nc-secondary) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+  outline: none !important;
+}
+
+/* ==========================================================================
+   6. Testimonial Quote Accent
+   ========================================================================== */
+.nc-quote-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.nc-quote-card::before {
+  content: "“";
+  position: absolute;
+  top: -10px;
+  right: 18px;
+  font-size: 5rem;
+  font-family: Georgia, serif;
+  line-height: 1;
+  color: rgba(37, 99, 235, 0.06);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   7. Accessibility & Focus States
+   ========================================================================== */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--nc-secondary) !important;
+  outline-offset: 2px !important;
+}
+
+/* ==========================================================================
+   8. Responsive Adjustments
+   ========================================================================== */
+@media (max-width: 767px) {
+  .nc-sticky-header {
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+  }
+  
+  .nc-btn-primary,
+  .nc-btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
