@@ -86,7 +86,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                 placeholder="e.g. Sarah Jenkins"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-3.5 py-3 sm:py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
             </div>
 
@@ -99,7 +99,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                   placeholder="sarah@enterprise.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-3.5 py-3 sm:py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
               <div className="space-y-1">
@@ -110,7 +110,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                   placeholder="(555) 000-0000"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-3.5 py-3 sm:py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
             </div>
@@ -120,7 +120,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
               <select
                 value={formData.service}
                 onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-3.5 py-3 sm:py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-600"
               >
                 {SERVICES.map((s) => (
                   <option key={s.id} value={s.title}>
@@ -137,7 +137,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                 placeholder="Mention number of employees, current cloud provider, or goals..."
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-3.5 py-3 sm:py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
             </div>
 

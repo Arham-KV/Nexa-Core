@@ -104,7 +104,7 @@ export default function ContactPage() {
                         placeholder="Johnathan Davis"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                        className="w-full px-4 py-3 sm:py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                       />
                     </div>
 
@@ -119,7 +119,7 @@ export default function ContactPage() {
                         placeholder="johnathan@company.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                        className="w-full px-4 py-3 sm:py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                       />
                     </div>
                   </div>
@@ -136,7 +136,7 @@ export default function ContactPage() {
                         placeholder="(555) 000-0000"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                        className="w-full px-4 py-3 sm:py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                       />
                     </div>
 
@@ -148,7 +148,7 @@ export default function ContactPage() {
                         id="contact-service"
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                        className="w-full px-4 py-3 sm:py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                       >
                         {SERVICES.map((s) => (
                           <option key={s.id} value={s.title}>
@@ -170,7 +170,7 @@ export default function ContactPage() {
                       placeholder="Please describe your current team size, pain points, or timeline..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                      className="w-full px-4 py-3 sm:py-2.5 rounded-xl border border-slate-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                     />
                   </div>
 

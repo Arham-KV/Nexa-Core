@@ -244,43 +244,17 @@ export default function ElementorEditorPanel({
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="font-semibold text-slate-300 block">Global Typography Preset (Elementor Pro)</label>
-                  <div className="p-2.5 rounded bg-[#1a1c1e] border border-[#34383c] space-y-2">
+                  <label className="font-semibold text-slate-300 block">Global Typography (Elementor Site Settings)</label>
+                  <div className="p-2.5 rounded bg-[#1a1c1e] border border-[#34383c] space-y-1.5">
                     <div className="flex items-center justify-between">
                       <span className="font-bold text-white text-xs">
-                        {fontTheme === 'outfit' ? 'Outfit + Manrope' : fontTheme === 'urbanist' ? 'Urbanist + Jakarta' : 'Syne + Manrope'}
+                        Plus Jakarta Sans (Global Active)
                       </span>
-                      <span className="text-[10px] text-emerald-400 font-mono">Active Preset</span>
+                      <span className="text-[10px] text-emerald-400 font-mono">100% Unified</span>
                     </div>
-                    {onChangeFontTheme && (
-                      <div className="grid grid-cols-3 gap-1 pt-1">
-                        <button
-                          onClick={() => onChangeFontTheme('outfit')}
-                          className={`py-1 px-1.5 rounded text-[10px] font-bold text-center transition-colors cursor-pointer ${
-                            fontTheme === 'outfit' ? 'bg-[#92003B] text-white' : 'bg-[#26292c] text-slate-400 hover:text-white'
-                          }`}
-                        >
-                          Outfit
-                        </button>
-                        <button
-                          onClick={() => onChangeFontTheme('urbanist')}
-                          className={`py-1 px-1.5 rounded text-[10px] font-bold text-center transition-colors cursor-pointer ${
-                            fontTheme === 'urbanist' ? 'bg-[#92003B] text-white' : 'bg-[#26292c] text-slate-400 hover:text-white'
-                          }`}
-                        >
-                          Urbanist
-                        </button>
-                        <button
-                          onClick={() => onChangeFontTheme('syne')}
-                          className={`py-1 px-1.5 rounded text-[10px] font-bold text-center transition-colors cursor-pointer ${
-                            fontTheme === 'syne' ? 'bg-[#92003B] text-white' : 'bg-[#26292c] text-slate-400 hover:text-white'
-                          }`}
-                        >
-                          Syne
-                        </button>
-                      </div>
-                    )}
-                    <p className="text-[10px] text-slate-400 pt-0.5">Primary Weight: 800 | Display Scale: 1.25x | Anti-aliased</p>
+                    <p className="text-[10px] text-slate-400">
+                      Standardized across entire site, headings, body, and mobile interface for consistent typography.
+                    </p>
                   </div>
                 </div>
 

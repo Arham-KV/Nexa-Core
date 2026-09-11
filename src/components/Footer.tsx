@@ -1,14 +1,15 @@
 import { PageId } from '../types';
 import { BUSINESS_INFO } from '../data/websiteData';
-import { MapPin, Phone, Mail, Clock, ArrowRight, Shield } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ArrowRight, Shield, LayoutDashboard } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
+  onOpenDashboard?: () => void;
 }
 
-export default function Footer({ onNavigate }: FooterProps) {
+export default function Footer({ onNavigate, onOpenDashboard }: FooterProps) {
   return (
-    <footer id="nc-global-footer" className="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
+    <footer id="nc-global-footer" className="bg-slate-900 text-slate-300 pt-16 pb-28 sm:pb-14 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-800/80">
           {/* Column 1: Brand & Bio (4 cols) */}
@@ -27,7 +28,7 @@ export default function Footer({ onNavigate }: FooterProps) {
             <div className="flex items-center gap-3 pt-2">
               <span className="inline-flex items-center gap-1.5 text-xs text-slate-400 bg-slate-800/70 px-3 py-1.5 rounded-md border border-slate-700/60">
                 <Shield className="w-3.5 h-3.5 text-emerald-400" />
-                SOC2 & HIPAA Compliant Operations
+                SOC2 &amp; HIPAA Compliant Operations
               </span>
             </div>
           </div>
@@ -39,7 +40,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               <li>
                 <button
                   onClick={() => onNavigate('home')}
-                  className="hover:text-blue-400 transition-colors text-slate-400 hover:translate-x-1 transition-transform inline-flex items-center gap-1"
+                  className="hover:text-blue-400 transition-colors text-slate-400 hover:translate-x-1 transition-transform inline-flex items-center gap-1 cursor-pointer"
                 >
                   <ArrowRight className="w-3 h-3 text-blue-500" />
                   <span>Home</span>
@@ -48,7 +49,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               <li>
                 <button
                   onClick={() => onNavigate('about')}
-                  className="hover:text-blue-400 transition-colors text-slate-400 hover:translate-x-1 transition-transform inline-flex items-center gap-1"
+                  className="hover:text-blue-400 transition-colors text-slate-400 hover:translate-x-1 transition-transform inline-flex items-center gap-1 cursor-pointer"
                 >
                   <ArrowRight className="w-3 h-3 text-blue-500" />
                   <span>About Us</span>
@@ -57,7 +58,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               <li>
                 <button
                   onClick={() => onNavigate('services')}
-                  className="hover:text-blue-400 transition-colors text-slate-400 hover:translate-x-1 transition-transform inline-flex items-center gap-1"
+                  className="hover:text-blue-400 transition-colors text-slate-400 hover:translate-x-1 transition-transform inline-flex items-center gap-1 cursor-pointer"
                 >
                   <ArrowRight className="w-3 h-3 text-blue-500" />
                   <span>Services</span>
@@ -66,12 +67,23 @@ export default function Footer({ onNavigate }: FooterProps) {
               <li>
                 <button
                   onClick={() => onNavigate('contact')}
-                  className="hover:text-blue-400 transition-colors text-slate-400 hover:translate-x-1 transition-transform inline-flex items-center gap-1"
+                  className="hover:text-blue-400 transition-colors text-slate-400 hover:translate-x-1 transition-transform inline-flex items-center gap-1 cursor-pointer"
                 >
                   <ArrowRight className="w-3 h-3 text-blue-500" />
                   <span>Contact</span>
                 </button>
               </li>
+              {onOpenDashboard && (
+                <li>
+                  <button
+                    onClick={onOpenDashboard}
+                    className="hover:text-blue-400 transition-colors text-slate-500 hover:translate-x-1 transition-transform inline-flex items-center gap-1 cursor-pointer text-xs"
+                  >
+                    <LayoutDashboard className="w-3 h-3 text-slate-500" />
+                    <span>WP-Admin</span>
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
 
@@ -79,11 +91,11 @@ export default function Footer({ onNavigate }: FooterProps) {
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider">Expertise</h4>
             <ul className="space-y-2.5 text-sm text-slate-400">
-              <li>Cloud Migration & AWS / Azure</li>
-              <li>24/7 Managed IT Support & NOC</li>
-              <li>Workflow Automation & APIs</li>
-              <li>Cybersecurity Defense & Zero-Trust</li>
-              <li>Data Warehousing & Dashboards</li>
+              <li>Cloud Migration &amp; AWS / Azure</li>
+              <li>24/7 Managed IT Support &amp; NOC</li>
+              <li>Workflow Automation &amp; APIs</li>
+              <li>Cybersecurity Defense &amp; Zero-Trust</li>
+              <li>Data Warehousing &amp; Dashboards</li>
             </ul>
           </div>
 
@@ -117,7 +129,7 @@ export default function Footer({ onNavigate }: FooterProps) {
 
         {/* Sub-Footer */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} NexaCore Solutions LLC. All rights reserved. WordPress + Elementor Project Showcase.</p>
+          <p>© {new Date().getFullYear()} NexaCore Solutions LLC. Built with WordPress &amp; Elementor Pro.</p>
           <div className="flex items-center gap-6">
             <span className="hover:text-slate-400 cursor-pointer">Privacy Policy</span>
             <span className="hover:text-slate-400 cursor-pointer">Terms of Service</span>

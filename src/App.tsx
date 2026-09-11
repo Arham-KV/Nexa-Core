@@ -5,45 +5,41 @@
 
 import { useState } from 'react';
 import { PageId } from './types';
+import { useRouter } from './lib/router';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './components/HomePage';
 import AboutPage from './components/AboutPage';
 import ServicesPage from './components/ServicesPage';
 import ContactPage from './components/ContactPage';
+import MobileBottomNav from './components/MobileBottomNav';
 import ConsultationModal from './components/ConsultationModal';
 import WordPressAdminBar from './components/WordPressAdminBar';
 import WordPressDashboard from './components/WordPressDashboard';
 import ElementorEditorPanel from './components/ElementorEditorPanel';
 import VercelDeployModal from './components/VercelDeployModal';
 import UpworkPortfolioModal from './components/UpworkPortfolioModal';
-import {
-  Sparkles,
-  LayoutDashboard,
-  Award
-} from 'lucide-react';
+import { Award } from 'lucide-react';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<PageId>('home');
-  const [currentView, setCurrentView] = useState<'website' | 'dashboard'>('website');
+  const { currentPage, currentView, isElementorMode, navigate } = useRouter();
   const [consultationOpen, setConsultationOpen] = useState(false);
   const [vercelModalOpen, setVercelModalOpen] = useState(false);
   const [upworkModalOpen, setUpworkModalOpen] = useState(false);
   const [adminBarVisible, setAdminBarVisible] = useState(true);
-  const [isElementorMode, setIsElementorMode] = useState(false);
   const [selectedElement, setSelectedElement] = useState<string>('none');
   const [deviceMode, setDeviceMode] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
-  const [fontTheme, setFontTheme] = useState<'outfit' | 'urbanist' | 'syne'>('outfit');
 
   const handleToggleElementor = () => {
-    setIsElementorMode(!isElementorMode);
-    setCurrentView('website');
+    if (isElementorMode) {
+      navigate(currentPage, { view: 'website', elementor: false });
+    } else {
+      navigate('elementor');
+    }
   };
 
   const handleEditPageWithElementor = (page: PageId) => {
-    setCurrentPage(page);
-    setCurrentView('website');
-    setIsElementorMode(true);
+    navigate(page, { view: 'website', elementor: true });
   };
 
   const renderCurrentPage = () => {
@@ -55,7 +51,7 @@ export default function App() {
             className={isElementorMode ? 'cursor-pointer' : ''}
           >
             <HomePage
-              onNavigate={(p) => setCurrentPage(p)}
+              onNavigate={(p) => navigate(p)}
               onOpenConsultation={() => setConsultationOpen(true)}
             />
           </div>
@@ -67,7 +63,7 @@ export default function App() {
             className={isElementorMode ? 'cursor-pointer' : ''}
           >
             <AboutPage
-              onNavigate={(p) => setCurrentPage(p)}
+              onNavigate={(p) => navigate(p)}
               onOpenConsultation={() => setConsultationOpen(true)}
             />
           </div>
@@ -79,7 +75,7 @@ export default function App() {
             className={isElementorMode ? 'cursor-pointer' : ''}
           >
             <ServicesPage
-              onNavigate={(p) => setCurrentPage(p)}
+              onNavigate={(p) => navigate(p)}
               onOpenConsultation={() => setConsultationOpen(true)}
             />
           </div>
@@ -96,7 +92,7 @@ export default function App() {
       default:
         return (
           <HomePage
-            onNavigate={(p) => setCurrentPage(p)}
+            onNavigate={(p) => navigate(p)}
             onOpenConsultation={() => setConsultationOpen(true)}
           />
         );
@@ -106,9 +102,9 @@ export default function App() {
   // If in WordPress Admin Dashboard mode (/wp-admin)
   if (currentView === 'dashboard') {
     return (
-      <div data-font-theme={fontTheme} className="min-h-screen bg-[#f0f0f1] font-sans antialiased text-[#2c3338]">
+      <div className="min-h-screen bg-[#f0f0f1] font-sans antialiased text-[#2c3338]">
         <WordPressDashboard
-          onVisitSite={() => setCurrentView('website')}
+          onVisitSite={() => navigate('home')}
           onEditPageWithElementor={handleEditPageWithElementor}
           onOpenUpworkKit={() => setUpworkModalOpen(true)}
           onOpenVercelGuide={() => setVercelModalOpen(true)}
@@ -129,49 +125,37 @@ export default function App() {
     );
   }
 
-  // Pure Authentic WordPress Website Mode
+  // Pure Authentic WordPress Website Mode with URL Routing & Mobile App Feel
   return (
-    <div data-font-theme={fontTheme} className="min-h-screen flex flex-col bg-white font-sans text-slate-800 selection:bg-blue-600 selection:text-white">
-      {/* =========================================================================
-          AUTHENTIC WORDPRESS ADMIN BAR (TOP 32px)
-          Provides real WordPress admin controls, Elementor launcher & Vercel deployment
-          ========================================================================= */}
+    <div className="min-h-screen flex flex-col bg-white font-sans text-slate-800 selection:bg-blue-600 selection:text-white">
+      {/* Authentic WordPress Admin Bar (Top 32px) */}
       <WordPressAdminBar
         adminBarVisible={adminBarVisible}
         onToggleAdminBar={() => setAdminBarVisible(!adminBarVisible)}
         isElementorMode={isElementorMode}
         onEditWithElementor={handleToggleElementor}
-        onOpenDashboard={() => setCurrentView('dashboard')}
+        onOpenDashboard={() => navigate('wp-admin')}
         onOpenUpworkKit={() => setUpworkModalOpen(true)}
         onOpenVercelGuide={() => setVercelModalOpen(true)}
         currentView={currentView}
-        fontTheme={fontTheme}
-        onChangeFontTheme={setFontTheme}
       />
 
-      {/* =========================================================================
-          MAIN APPLICATION VIEW
-          When Elementor Mode is active, split into:
-          [Left: Elementor Editor Panel] + [Right: Live Editable Canvas with Elementor Handles]
-          When Normal Mode is active: 100% PURE, CLEAN FULL-SCREEN WEBSITE
-          ========================================================================= */}
+      {/* Main Container */}
       <main className="flex-1 w-full flex overflow-x-hidden">
         {isElementorMode && (
           <ElementorEditorPanel
-            onClose={() => setIsElementorMode(false)}
+            onClose={() => navigate(currentPage, { view: 'website', elementor: false })}
             selectedElement={selectedElement}
             onSelectElement={(el) => setSelectedElement(el)}
             onDeviceChange={(d) => setDeviceMode(d)}
             currentDevice={deviceMode}
-            fontTheme={fontTheme}
-            onChangeFontTheme={setFontTheme}
           />
         )}
 
         <div className="flex-1 flex flex-col bg-white overflow-y-auto">
           {/* Elementor Active Notification Ribbon */}
           {isElementorMode && (
-            <div className="w-full bg-[#92003B] text-white px-4 py-2 shadow-sm flex items-center justify-between text-xs z-30">
+            <div className="w-full bg-[#92003B] text-white px-3 sm:px-4 py-2 shadow-sm flex items-center justify-between text-xs z-30">
               <div className="flex items-center gap-2">
                 <span className="font-mono bg-black/20 px-2 py-0.5 rounded font-bold">
                   Elementor Flexbox Container Active
@@ -181,7 +165,7 @@ export default function App() {
                 </span>
               </div>
               <button
-                onClick={() => setIsElementorMode(false)}
+                onClick={() => navigate(currentPage, { view: 'website', elementor: false })}
                 className="underline text-white font-bold cursor-pointer hover:text-pink-200"
               >
                 Exit to Live Website
@@ -213,33 +197,44 @@ export default function App() {
               </div>
             )}
 
-            {/* WordPress Header */}
+            {/* Header */}
             <Header
               currentPage={currentPage}
-              onNavigate={(page) => setCurrentPage(page)}
+              onNavigate={(page) => navigate(page)}
               onOpenConsultation={() => setConsultationOpen(true)}
+              onOpenDashboard={() => navigate('wp-admin')}
             />
 
-            {/* Page Content */}
-            <div className="flex-1 w-full">{renderCurrentPage()}</div>
+            {/* Page Content with safe padding on mobile for the bottom nav bar */}
+            <div className="flex-1 w-full pb-16 md:pb-0">{renderCurrentPage()}</div>
 
-            {/* WordPress Footer */}
-            <Footer onNavigate={(page) => setCurrentPage(page)} />
+            {/* Footer */}
+            <Footer
+              onNavigate={(page) => navigate(page)}
+              onOpenDashboard={() => navigate('wp-admin')}
+            />
           </div>
         </div>
       </main>
 
-      {/* Floating WordPress Quick Controls for Upwork Demonstration */}
-      <div className="fixed bottom-4 right-4 z-40 flex items-center gap-2 bg-slate-900/90 backdrop-blur-md p-1.5 rounded-full border border-slate-700 shadow-xl text-xs">
+      {/* Mobile Bottom Navigation Bar (Bespoke native mobile feel) */}
+      <MobileBottomNav
+        currentPage={currentPage}
+        onNavigate={(p) => navigate(p)}
+        onOpenConsultation={() => setConsultationOpen(true)}
+      />
+
+      {/* Desktop Floating WordPress Quick Controls for Upwork Demonstration */}
+      <div className="hidden md:flex fixed bottom-4 right-4 z-40 items-center gap-2 bg-slate-900/90 backdrop-blur-md p-1.5 rounded-full border border-slate-700 shadow-xl text-xs">
         <button
-          onClick={() => setCurrentView('dashboard')}
+          onClick={() => navigate('wp-admin')}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1d2327] hover:bg-slate-800 text-white font-medium transition-colors cursor-pointer"
           title="Open WordPress Backend (/wp-admin)"
         >
           <span className="w-4 h-4 rounded-full bg-white text-[#1d2327] flex items-center justify-center font-serif font-black text-[10px]">
             W
           </span>
-          <span className="hidden sm:inline">WP-Admin</span>
+          <span>WP-Admin</span>
         </button>
 
         <button
@@ -263,7 +258,7 @@ export default function App() {
           title="Open Upwork Portfolio Case Study Material"
         >
           <Award className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">Upwork Kit</span>
+          <span>Upwork Kit</span>
         </button>
       </div>
 
