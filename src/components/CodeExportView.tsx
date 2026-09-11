@@ -136,6 +136,56 @@ Built using WordPress 6.x and Elementor Pro with 100% Flexbox Containers. Zero l
 - Headings: Plus Jakarta Sans / Body: Inter`
   },
   {
+    name: 'vercel.json',
+    path: 'vercel.json',
+    type: 'json',
+    badge: 'Vercel Deployment',
+    content: `{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}`
+  },
+  {
+    name: 'elementor-home.json',
+    path: 'elementor/nexacore-home-template.json',
+    type: 'json',
+    badge: 'Elementor Pro JSON',
+    content: `{
+  "version": "0.4",
+  "title": "NexaCore Solutions - Homepage (Elementor Flexbox Container)",
+  "type": "page",
+  "content": [
+    {
+      "id": "nc_header_container",
+      "elType": "container",
+      "settings": {
+        "content_width": "full",
+        "boxed_width": { "unit": "px", "size": 1240 },
+        "flex_direction": "row",
+        "justify_content": "space-between",
+        "background_color": "rgba(255, 255, 255, 0.95)",
+        "css_classes": "nc-sticky-header"
+      }
+    },
+    {
+      "id": "nc_hero_section",
+      "elType": "container",
+      "settings": {
+        "content_width": "full",
+        "boxed_width": { "unit": "px", "size": 1200 },
+        "flex_direction": "row",
+        "min_height": { "unit": "px", "size": 680 },
+        "background_color": "#F8FAFC"
+      }
+    }
+  ]
+}`
+  },
+  {
     name: 'elementor-guide.md',
     path: 'elementor/README.md',
     type: 'markdown',
